@@ -1,0 +1,29 @@
+name: CI
+
+on: [push,pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.7.2
+
+    - name: Install dependencies
+      run: make install
+
+    - name: Validate JS results
+      run: make test-js
+
+    - name: Validate Java results
+      run: make test-java
+
+    - name: Validate Ruby results
+      run: make test-rb
+
+    - name: Validate Specflow results
+      run: make test-specflow
