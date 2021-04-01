@@ -13,7 +13,7 @@ jobs:
         ruby-version: 2.7.2
     - name: Run the default task
       run: |
-				cd ruby
+        cd ruby
         gem install bundler -v 2.2.9
         bundle install
         bundle exec rake
