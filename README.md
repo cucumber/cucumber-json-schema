@@ -6,12 +6,26 @@ Tools that consume Cucumber JSON can use these schemas to validate that a docume
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/cucumber-json-schema. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/cucumber-json-schema/blob/master/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at https://github.com/cucumber/cucumber-json-schema.
+
+### Development
+Make commands are available to help you
+
+```bash
+make install        # Install everything you need to develop
+
+make test           # Run validation of the schema against
+                    # every known cucumber json results
+
+make test-java      # Run validation of the schema against every java results
+make test-js        # Run validation of the schema against every js results
+make test-rb        # Run validation of the schema against every rb results
+make test-specflow  # Run validation of the schema against every specflow results
+
+make clean          # Cleanup dependencies that has been installed by `make install`
+```
 
 ## License
 
 The project is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
 
-## Code of Conduct
-
-Everyone interacting in the cucumber-json-schema project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/cucumber-json-schema/blob/master/CODE_OF_CONDUCT.md).
