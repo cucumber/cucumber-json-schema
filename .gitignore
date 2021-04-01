@@ -7,6 +7,7 @@
 /spec/reports/
 /tmp/
 *.gem
+cucumber-json-testdata-generator-master
 
 # rspec failure tracking
 .rspec_status
