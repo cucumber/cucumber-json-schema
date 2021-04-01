@@ -6,9 +6,9 @@ default: sync-schema ruby-build
 
 
 sync-schema:
-	cp -f schema.json ruby/lib/cucumber/json/schema.json
+	cp -f ../schema.json lib/cucumber/json/schema.json
 
 
 ruby-build:
-	cd ruby && gem build cucumber-json-schema
+	gem build cucumber-json-schema
 
