@@ -1,16 +1,22 @@
-.PHONY: build clean ruby-build sync-schema
+.PHONY: build clean .build-gem .sync-schema
 
 SHELL := /usr/bin/env bash
 
-default: sync-schema ruby-build
+default: build
 
-build: default
+install:
+	bundle
+
+test:
+	bundle exec rspec
+
+build: sync-schema build-gem
 
 sync-schema:
 	cp -f ../schema.json lib/cucumber/json/schema.json
 
 
-ruby-build:
+build-gem:
 	gem build cucumber-json-schema
 
 clean:
