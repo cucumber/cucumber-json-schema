@@ -1,4 +1,5 @@
 {
+  "$schema": "http://json-schema.org/draft-04/schema#",
   "definitions": {
     "tags": {
       "type": "array",
@@ -12,29 +13,93 @@
       },
       "optional": true
     },
+    "element": {
+      "type": "object",
+      "properties": {
+        "keyword": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "line": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "tags": {
+          "$ref": "#/definitions/tags"
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/step"
+          }
+        }
+      },
+      "required": ["type", "line"]
+    },
     "step": {
       "type": "object",
       "properties": {
         "keyword": {
           "type": "string"
         },
+        "line": {
+          "type": "integer"
+        },
         "name": {
           "type": "string"
+        },
+        "hidden": {
+          "type": "boolean"
         },
         "result": {
           "type": "object",
           "properties": {
             "status": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "passed", "Passed", "PASSED",
+                "failed", "Failed", "FAILED",
+                "undefined", "Undefined", "UNDEFINED",
+                "skipped", "Skipped", "SKIPPED",
+                "pending", "Pending", "PENDING",
+                "ambiguous", "Ambiguous", "AMBIGUOUS"
+              ]
             },
             "duration": {
               "type": "number"
+            },
+            "error_message": {
+              "type": "string"
             }
           },
-          "required": ["status"]
+          "required": ["status"],
+          "if": {
+            "properties": { "status": { "pattern": "^(?:f|F)(?:ailed|AILED)$" } }
+          },
+          "then": {
+            "required": ["error_message"]
+          }
         }
       },
-      "required": ["keyword"]
+      "required": ["keyword"],
+      "if": {
+        "not": {
+          "properties": { "hidden": { "const": true } },
+          "required": ["hidden"]
+        }
+      },
+      "then": {
+        "required": ["line"]
+      }
+
+
     }
   },
   "type": "array",
@@ -56,24 +121,7 @@
       "elements": {
         "type": "array",
         "items": {
-          "type": "object",
-          "properties": {
-            "keyword": {
-              "type": "string"
-            },
-            "name": {
-              "type": "string"
-            },
-            "tags": {
-              "$ref": "#/definitions/tags"
-            },
-            "steps": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/step"
-              }
-            }
-          }
+          "$ref": "#/definitions/element"
         }
       }
     }

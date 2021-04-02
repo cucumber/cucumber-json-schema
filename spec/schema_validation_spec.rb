@@ -59,5 +59,37 @@ RSpec.describe 'schema' do
 
       expect(schemer.valid?(step_without_keyword_result)).to be_falsy
     end
+
+    it 'rejects when there is no line' do
+      step_without_line_result = JSON.parse(File.read('testdata/invalid/step_without_line.json'))
+
+      expect(schemer.valid?(step_without_line_result)).to be_falsy
+    end
+
+    it 'rejects when there is no error message for a failing step' do
+      step_fail_without_error_message_result = JSON.parse(File.read('testdata/invalid/step_fail_without_error_message.json'))
+
+      expect(schemer.valid?(step_fail_without_error_message_result)).to be_falsy
+    end
+
+    it 'rejects invalid status' do
+      step_with_invalid_status_result = JSON.parse(File.read('testdata/invalid/step_with_invalid_status.json'))
+
+      expect(schemer.valid?(step_with_invalid_status_result)).to be_falsy
+    end
+  end
+
+  describe 'element' do
+    it 'rejects when there is no type' do
+      element_without_type_result = JSON.parse(File.read('testdata/invalid/element_without_type.json'))
+
+      expect(schemer.valid?(element_without_type_result)).to be_falsy
+    end
+
+    it 'rejects when there is no line' do
+      element_without_line_result = JSON.parse(File.read('testdata/invalid/element_without_line.json'))
+
+      expect(schemer.valid?(element_without_line_result)).to be_falsy
+    end
   end
 end
