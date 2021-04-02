@@ -1,0 +1,14 @@
+[
+  {
+    "description": "  Here is a description",
+    "elements": [],
+    "id": "",
+    "keyword": "Feature",
+    "line": 1,
+    "tags": [
+      { "line": 1 }
+    ],
+    "name": "Tag invalid",
+    "uri": "features/tag_invalid.json"
+  }
+]

@@ -1,17 +1,18 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "definitions": {
-    "tags": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          }
+    "tag": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^@"
+        },
+        "line": {
+          "type": "integer"
         }
       },
-      "optional": true
+      "required": ["name"]
     },
     "feature": {
       "type": "object",
@@ -26,7 +27,10 @@
           "type": "string"
         },
         "tags": {
-          "$ref": "#/definitions/tags"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/tag"
+          }
         },
         "elements": {
           "type": "array",
@@ -56,7 +60,10 @@
           "type": "string"
         },
         "tags": {
-          "$ref": "#/definitions/tags"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/tag"
+          }
         },
         "steps": {
           "type": "array",

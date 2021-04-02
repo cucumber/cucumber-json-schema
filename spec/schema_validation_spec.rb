@@ -47,6 +47,20 @@ RSpec.describe 'schema' do
     end
   end
 
+  describe 'tag' do
+    it 'rejects when there is no name' do
+      tag_without_name_result = JSON.parse(File.read('testdata/invalid/tag_without_name.json'))
+
+      expect(schemer.valid?(tag_without_name_result)).to be_falsy
+    end
+
+    it 'rejects when it does not start with @' do
+      tag_invalid_result = JSON.parse(File.read('testdata/invalid/tag_invalid.json'))
+
+      expect(schemer.valid?(tag_invalid_result)).to be_falsy
+    end
+  end
+
   describe 'step' do
     it 'rejects when there is no status' do
       step_without_status_result = JSON.parse(File.read('testdata/invalid/step_without_status.json'))
