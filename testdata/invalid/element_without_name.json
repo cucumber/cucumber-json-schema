@@ -6,7 +6,7 @@
         "description": "",
         "id": ";",
         "keyword": "Scenario",
-        "name": "",
+        "line": 7,
         "type": "scenario"
       }
     ],
@@ -15,6 +15,6 @@
     "line": 1,
     "name": "",
     "tags": [],
-    "uri": "features/element_without_line.feature"
+    "uri": "features/element_without_name.feature"
   }
 ]

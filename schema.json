@@ -13,6 +13,30 @@
       },
       "optional": true
     },
+    "feature": {
+      "type": "object",
+      "properties": {
+        "uri": {
+          "type": "string"
+        },
+        "keyword": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "tags": {
+          "$ref": "#/definitions/tags"
+        },
+        "elements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/element"
+          }
+        }
+      },
+      "required": ["name", "uri"]
+    },
     "element": {
       "type": "object",
       "properties": {
@@ -41,7 +65,7 @@
           }
         }
       },
-      "required": ["type", "line"]
+      "required": ["type", "line", "name"]
     },
     "step": {
       "type": "object",
@@ -104,26 +128,6 @@
   },
   "type": "array",
   "items": {
-    "type": "object",
-    "properties": {
-      "uri": {
-        "type": "string"
-      },
-      "keyword": {
-        "type": "string"
-      },
-      "name": {
-        "type": "string"
-      },
-      "tags": {
-        "$ref": "#/definitions/tags"
-      },
-      "elements": {
-        "type": "array",
-        "items": {
-          "$ref": "#/definitions/element"
-        }
-      }
-    }
+    "$ref": "#/definitions/feature"
   }
 }

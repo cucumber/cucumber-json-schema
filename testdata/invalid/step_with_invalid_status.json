@@ -30,6 +30,6 @@
     "line": 1,
     "name": "",
     "tags": [],
-    "uri": "features/step_without_keyword.feature"
+    "uri": "features/step_with_invalid_status.feature"
   }
 ]

@@ -91,5 +91,25 @@ RSpec.describe 'schema' do
 
       expect(schemer.valid?(element_without_line_result)).to be_falsy
     end
+
+    it 'rejects when there is no name' do
+      element_without_line_result = JSON.parse(File.read('testdata/invalid/element_without_name.json'))
+
+      expect(schemer.valid?(element_without_line_result)).to be_falsy
+    end
+  end
+
+  describe 'feature' do
+    it 'rejects when there is no name' do
+      feature_without_name_result = JSON.parse(File.read('testdata/invalid/feature_without_name.json'))
+
+      expect(schemer.valid?(feature_without_name_result)).to be_falsy
+    end
+
+    it 'rejects when there is no uri' do
+      feature_without_uri_result = JSON.parse(File.read('testdata/invalid/feature_without_uri.json'))
+
+      expect(schemer.valid?(feature_without_uri_result)).to be_falsy
+    end
   end
 end

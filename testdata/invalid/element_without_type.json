@@ -7,21 +7,7 @@
         "id": ";",
         "keyword": "Scenario",
         "line": 7,
-        "name": "",
-        "steps": [
-          {
-            "keyword": "Given ",
-            "line": 8,
-            "match": {
-              "location": "Steps.java:17"
-            },
-            "name": "this step passes",
-            "result": {
-              "duration": 110881,
-              "status": "passed"
-            }
-          }
-        ]
+        "name": ""
       }
     ],
     "id": "",
@@ -29,6 +15,6 @@
     "line": 1,
     "name": "",
     "tags": [],
-    "uri": "features/step_without_keyword.feature"
+    "uri": "features/element_without_type.feature"
   }
 ]

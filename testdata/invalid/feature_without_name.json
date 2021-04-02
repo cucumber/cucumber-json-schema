@@ -1,0 +1,11 @@
+[
+  {
+    "description": "  Here is a description",
+    "elements": [],
+    "id": "",
+    "keyword": "Feature",
+    "line": 1,
+    "tags": [],
+    "uri": "features/feature_without_name.feature"
+  }
+]
