@@ -11,6 +11,30 @@
         }
       },
       "optional": true
+    },
+    "step": {
+      "type": "object",
+      "properties": {
+        "keyword": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "result": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string"
+            },
+            "duration": {
+              "type": "number"
+            }
+          },
+          "required": ["status"]
+        }
+      },
+      "required": ["keyword"]
     }
   },
   "type": "array",
@@ -46,26 +70,7 @@
             "steps": {
               "type": "array",
               "items": {
-                "type": "object",
-                "properties": {
-                  "keyword": {
-                    "type": "string"
-                  },
-                  "name": {
-                    "type": "string"
-                  },
-                  "result": {
-                    "type": "object",
-                    "properties": {
-                      "status": {
-                        "type": "string"
-                      },
-                      "duration": {
-                        "type": "number"
-                      }
-                    }
-                  }
-                }
+                "$ref": "#/definitions/step"
               }
             }
           }

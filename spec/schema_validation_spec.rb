@@ -46,4 +46,18 @@ RSpec.describe 'schema' do
       end
     end
   end
+
+  describe 'step' do
+    it 'rejects when there is no status' do
+      step_without_status_result = JSON.parse(File.read('testdata/invalid/step_without_status.json'))
+
+      expect(schemer.valid?(step_without_status_result)).to be_falsy
+    end
+
+    it 'rejects when there is no keyword' do
+      step_without_keyword_result = JSON.parse(File.read('testdata/invalid/step_without_keyword.json'))
+
+      expect(schemer.valid?(step_without_keyword_result)).to be_falsy
+    end
+  end
 end
