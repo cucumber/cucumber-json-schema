@@ -6,10 +6,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Changed
+- Add tests and workflows ([#7](https://github.com/cucumber/cucumber-json-schema/pull/7))
 
 ## [0.1.0] - 2024-04-18
 ### Added
-- Initial-release
+- Initial release
 
 [Unreleased]: https://github.com/cucumber/cucumber-json-schema/compare/v0.1.0...HEAD
 [0.1.0]: https://github.com/cucumber/html-formatter/compare/8d0dcd7300b187348157e8ac9e01d45b066dcd1a...v0.1.0
