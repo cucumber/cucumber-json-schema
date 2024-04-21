@@ -5,5 +5,12 @@
   "license": "MIT",
   "files": [
     "schemas"
-  ]
+  ],
+  "devDependencies": {
+    "@types/node": "^20.12.7",
+    "jsonschema": "^1.4.1"
+  },
+  "scripts": {
+    "test": "node ./validation.test.mjs"
+  }
 }
