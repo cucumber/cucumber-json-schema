@@ -1,116 +1,121 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
   "$ref": "#/definitions/CucumberRubyJson",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "CucumberRubyJson": {
-      "type": "array",
       "items": {
         "$ref": "#/definitions/RubyFeature"
-      }
+      },
+      "type": "array"
     },
-    "RubyFeature": {
-      "type": "object",
+    "RubyArgument": {
+      "additionalProperties": false,
       "properties": {
-        "uri": {
-          "type": "string"
+        "offset": {
+          "type": "number"
         },
-        "id": {
+        "val": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "val",
+        "offset"
+      ],
+      "type": "object"
+    },
+    "RubyDataTableRow": {
+      "additionalProperties": false,
+      "properties": {
+        "cells": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "cells"
+      ],
+      "type": "object"
+    },
+    "RubyDocString": {
+      "additionalProperties": false,
+      "properties": {
+        "content_type": {
           "type": "string"
         },
         "line": {
           "type": "number"
         },
-        "keyword": {
+        "value": {
           "type": "string"
+        }
+      },
+      "required": [
+        "value",
+        "line"
+      ],
+      "type": "object"
+    },
+    "RubyElement": {
+      "additionalProperties": false,
+      "properties": {
+        "after": {
+          "items": {
+            "$ref": "#/definitions/RubyHook"
+          },
+          "type": "array"
         },
-        "name": {
-          "type": "string"
+        "before": {
+          "items": {
+            "$ref": "#/definitions/RubyHook"
+          },
+          "type": "array"
         },
         "description": {
           "type": "string"
         },
-        "elements": {
-          "type": "array",
+        "examples": {
           "items": {
-            "$ref": "#/definitions/RubyElement"
-          }
+            "$ref": "#/definitions/RubyExamples"
+          },
+          "type": "array"
         },
-        "tags": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RubyTag"
-          }
-        }
-      },
-      "required": [
-        "uri",
-        "id",
-        "line",
-        "keyword",
-        "name",
-        "description",
-        "elements"
-      ],
-      "additionalProperties": false
-    },
-    "RubyElement": {
-      "type": "object",
-      "properties": {
-        "start_timestamp": {
+        "id": {
+          "type": "string"
+        },
+        "keyword": {
           "type": "string"
         },
         "line": {
           "type": "number"
         },
-        "id": {
+        "name": {
           "type": "string"
         },
+        "start_timestamp": {
+          "type": "string"
+        },
+        "steps": {
+          "items": {
+            "$ref": "#/definitions/RubyStep"
+          },
+          "type": "array"
+        },
+        "tags": {
+          "items": {
+            "$ref": "#/definitions/RubyTag"
+          },
+          "type": "array"
+        },
         "type": {
-          "type": "string",
           "enum": [
             "background",
             "scenario",
             "scenario_outline"
-          ]
-        },
-        "keyword": {
+          ],
           "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "steps": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RubyStep"
-          }
-        },
-        "before": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RubyHook"
-          }
-        },
-        "after": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RubyHook"
-          }
-        },
-        "tags": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RubyTag"
-          }
-        },
-        "examples": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RubyExamples"
-          }
         }
       },
       "required": [
@@ -121,203 +126,37 @@
         "description",
         "steps"
       ],
-      "additionalProperties": false
-    },
-    "RubyStep": {
-      "type": "object",
-      "properties": {
-        "keyword": {
-          "type": "string"
-        },
-        "line": {
-          "type": "number"
-        },
-        "match": {
-          "$ref": "#/definitions/RubyMatch"
-        },
-        "name": {
-          "type": "string"
-        },
-        "result": {
-          "$ref": "#/definitions/RubyResult"
-        },
-        "doc_string": {
-          "$ref": "#/definitions/RubyDocString"
-        },
-        "rows": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RubyDataTableRow"
-          }
-        },
-        "after": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RubyHook"
-          }
-        }
-      },
-      "required": [
-        "keyword",
-        "line",
-        "name"
-      ],
-      "additionalProperties": false
-    },
-    "RubyMatch": {
-      "type": "object",
-      "properties": {
-        "location": {
-          "type": "string"
-        },
-        "arguments": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RubyArgument"
-          }
-        }
-      },
-      "additionalProperties": false
-    },
-    "RubyArgument": {
-      "type": "object",
-      "properties": {
-        "val": {
-          "type": "string"
-        },
-        "offset": {
-          "type": "number"
-        }
-      },
-      "required": [
-        "val",
-        "offset"
-      ],
-      "additionalProperties": false
-    },
-    "RubyResult": {
-      "type": "object",
-      "properties": {
-        "duration": {
-          "type": "number"
-        },
-        "status": {
-          "$ref": "#/definitions/RubyStatus"
-        },
-        "error_message": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "status"
-      ],
-      "additionalProperties": false
-    },
-    "RubyStatus": {
-      "type": "string",
-      "enum": [
-        "passed",
-        "failed",
-        "skipped",
-        "undefined",
-        "pending"
-      ]
-    },
-    "RubyDocString": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "string"
-        },
-        "line": {
-          "type": "number"
-        },
-        "content_type": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "value",
-        "line"
-      ],
-      "additionalProperties": false
-    },
-    "RubyDataTableRow": {
-      "type": "object",
-      "properties": {
-        "cells": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "cells"
-      ],
-      "additionalProperties": false
-    },
-    "RubyHook": {
-      "type": "object",
-      "properties": {
-        "match": {
-          "$ref": "#/definitions/RubyMatch"
-        },
-        "result": {
-          "$ref": "#/definitions/RubyResult"
-        }
-      },
-      "required": [
-        "match",
-        "result"
-      ],
-      "additionalProperties": false
-    },
-    "RubyTag": {
-      "type": "object",
-      "properties": {
-        "line": {
-          "type": "number"
-        },
-        "name": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "line",
-        "name"
-      ],
-      "additionalProperties": false
+      "type": "object"
     },
     "RubyExamples": {
-      "type": "object",
+      "additionalProperties": false,
       "properties": {
-        "id": {
-          "type": "string"
-        },
-        "line": {
-          "type": "number"
-        },
-        "keyword": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
         "description": {
           "type": "string"
         },
+        "id": {
+          "type": "string"
+        },
+        "keyword": {
+          "type": "string"
+        },
+        "line": {
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
+        },
         "rows": {
-          "type": "array",
           "items": {
             "$ref": "#/definitions/RubyExamplesTableRow"
-          }
+          },
+          "type": "array"
         },
         "tags": {
-          "type": "array",
           "items": {
             "$ref": "#/definitions/RubyTag"
-          }
+          },
+          "type": "array"
         }
       },
       "required": [
@@ -328,16 +167,16 @@
         "description",
         "rows"
       ],
-      "additionalProperties": false
+      "type": "object"
     },
     "RubyExamplesTableRow": {
-      "type": "object",
+      "additionalProperties": false,
       "properties": {
         "cells": {
-          "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "type": "array"
         },
         "id": {
           "type": "string"
@@ -351,7 +190,168 @@
         "id",
         "line"
       ],
-      "additionalProperties": false
+      "type": "object"
+    },
+    "RubyFeature": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "elements": {
+          "items": {
+            "$ref": "#/definitions/RubyElement"
+          },
+          "type": "array"
+        },
+        "id": {
+          "type": "string"
+        },
+        "keyword": {
+          "type": "string"
+        },
+        "line": {
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
+        },
+        "tags": {
+          "items": {
+            "$ref": "#/definitions/RubyTag"
+          },
+          "type": "array"
+        },
+        "uri": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "uri",
+        "id",
+        "line",
+        "keyword",
+        "name",
+        "description",
+        "elements"
+      ],
+      "type": "object"
+    },
+    "RubyHook": {
+      "additionalProperties": false,
+      "properties": {
+        "match": {
+          "$ref": "#/definitions/RubyMatch"
+        },
+        "result": {
+          "$ref": "#/definitions/RubyResult"
+        }
+      },
+      "required": [
+        "match",
+        "result"
+      ],
+      "type": "object"
+    },
+    "RubyMatch": {
+      "additionalProperties": false,
+      "properties": {
+        "arguments": {
+          "items": {
+            "$ref": "#/definitions/RubyArgument"
+          },
+          "type": "array"
+        },
+        "location": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "RubyResult": {
+      "additionalProperties": false,
+      "properties": {
+        "duration": {
+          "type": "number"
+        },
+        "error_message": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/RubyStatus"
+        }
+      },
+      "required": [
+        "status"
+      ],
+      "type": "object"
+    },
+    "RubyStatus": {
+      "enum": [
+        "passed",
+        "failed",
+        "skipped",
+        "undefined",
+        "pending"
+      ],
+      "type": "string"
+    },
+    "RubyStep": {
+      "additionalProperties": false,
+      "properties": {
+        "after": {
+          "items": {
+            "$ref": "#/definitions/RubyHook"
+          },
+          "type": "array"
+        },
+        "doc_string": {
+          "$ref": "#/definitions/RubyDocString"
+        },
+        "keyword": {
+          "type": "string"
+        },
+        "line": {
+          "type": "number"
+        },
+        "match": {
+          "$ref": "#/definitions/RubyMatch"
+        },
+        "name": {
+          "type": "string"
+        },
+        "result": {
+          "$ref": "#/definitions/RubyResult"
+        },
+        "rows": {
+          "items": {
+            "$ref": "#/definitions/RubyDataTableRow"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "keyword",
+        "line",
+        "name"
+      ],
+      "type": "object"
+    },
+    "RubyTag": {
+      "additionalProperties": false,
+      "properties": {
+        "line": {
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "line",
+        "name"
+      ],
+      "type": "object"
     }
   }
 }

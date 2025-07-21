@@ -1,115 +1,123 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
   "$ref": "#/definitions/CucumberJson",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "CucumberJson": {
-      "type": "object",
+      "additionalProperties": false,
       "properties": {
-        "implementation": {
-          "type": "string"
-        },
         "features": {
-          "type": "array",
           "items": {
             "$ref": "#/definitions/Feature"
-          }
+          },
+          "type": "array"
+        },
+        "implementation": {
+          "type": "string"
         }
       },
       "required": [
         "implementation",
         "features"
       ],
-      "additionalProperties": false
+      "type": "object"
     },
-    "Feature": {
-      "type": "object",
+    "Argument": {
+      "additionalProperties": false,
       "properties": {
-        "uri": {
-          "type": "string"
-        },
-        "id": {
-          "type": "string"
-        },
-        "line": {
+        "offset": {
           "type": "number"
         },
-        "keyword": {
+        "value": {
           "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "elements": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Element"
-          }
-        },
-        "tags": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Tag"
-          }
         }
       },
       "required": [
-        "uri",
-        "keyword",
-        "name",
-        "elements"
+        "value",
+        "offset"
       ],
-      "additionalProperties": false
+      "type": "object"
     },
-    "Element": {
-      "type": "object",
+    "DataTableRow": {
+      "additionalProperties": false,
       "properties": {
-        "start_timestamp": {
+        "cells": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "cells"
+      ],
+      "type": "object"
+    },
+    "DocString": {
+      "additionalProperties": false,
+      "properties": {
+        "content_type": {
           "type": "string"
         },
         "line": {
           "type": "number"
         },
-        "id": {
+        "value": {
           "type": "string"
+        }
+      },
+      "required": [
+        "line",
+        "value"
+      ],
+      "type": "object"
+    },
+    "Element": {
+      "additionalProperties": false,
+      "properties": {
+        "after": {
+          "items": {
+            "$ref": "#/definitions/Hook"
+          },
+          "type": "array"
         },
-        "type": {
-          "$ref": "#/definitions/ElementType"
-        },
-        "keyword": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
+        "before": {
+          "items": {
+            "$ref": "#/definitions/Hook"
+          },
+          "type": "array"
         },
         "description": {
           "type": "string"
         },
-        "before": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Hook"
-          }
+        "id": {
+          "type": "string"
+        },
+        "keyword": {
+          "type": "string"
+        },
+        "line": {
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
+        },
+        "start_timestamp": {
+          "type": "string"
         },
         "steps": {
-          "type": "array",
           "items": {
             "$ref": "#/definitions/Step"
-          }
-        },
-        "after": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Hook"
-          }
+          },
+          "type": "array"
         },
         "tags": {
-          "type": "array",
           "items": {
             "$ref": "#/definitions/Tag"
-          }
+          },
+          "type": "array"
+        },
+        "type": {
+          "$ref": "#/definitions/ElementType"
         }
       },
       "required": [
@@ -120,17 +128,59 @@
         "description",
         "steps"
       ],
-      "additionalProperties": false
+      "type": "object"
     },
     "ElementType": {
-      "type": "string",
       "enum": [
         "background",
         "scenario"
-      ]
+      ],
+      "type": "string"
+    },
+    "Feature": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "elements": {
+          "items": {
+            "$ref": "#/definitions/Element"
+          },
+          "type": "array"
+        },
+        "id": {
+          "type": "string"
+        },
+        "keyword": {
+          "type": "string"
+        },
+        "line": {
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
+        },
+        "tags": {
+          "items": {
+            "$ref": "#/definitions/Tag"
+          },
+          "type": "array"
+        },
+        "uri": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "uri",
+        "keyword",
+        "name",
+        "elements"
+      ],
+      "type": "object"
     },
     "Hook": {
-      "type": "object",
+      "additionalProperties": false,
       "properties": {
         "match": {
           "$ref": "#/definitions/Match"
@@ -142,59 +192,42 @@
       "required": [
         "result"
       ],
-      "additionalProperties": false
+      "type": "object"
     },
     "Match": {
-      "type": "object",
+      "additionalProperties": false,
       "properties": {
-        "location": {
-          "type": "string"
-        },
         "arguments": {
-          "type": "array",
           "items": {
             "$ref": "#/definitions/Argument"
-          }
-        }
-      },
-      "additionalProperties": false
-    },
-    "Argument": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "string"
+          },
+          "type": "array"
         },
-        "offset": {
-          "type": "number"
+        "location": {
+          "type": "string"
         }
       },
-      "required": [
-        "value",
-        "offset"
-      ],
-      "additionalProperties": false
+      "type": "object"
     },
     "Result": {
-      "type": "object",
+      "additionalProperties": false,
       "properties": {
         "duration": {
           "type": "number"
         },
-        "status": {
-          "$ref": "#/definitions/Status"
-        },
         "error_message": {
           "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/Status"
         }
       },
       "required": [
         "status"
       ],
-      "additionalProperties": false
+      "type": "object"
     },
     "Status": {
-      "type": "string",
       "enum": [
         "passed",
         "failed",
@@ -202,11 +235,15 @@
         "undefined",
         "pending",
         "unknown"
-      ]
+      ],
+      "type": "string"
     },
     "Step": {
-      "type": "object",
+      "additionalProperties": false,
       "properties": {
+        "doc_string": {
+          "$ref": "#/definitions/DocString"
+        },
         "keyword": {
           "type": "string"
         },
@@ -222,14 +259,11 @@
         "result": {
           "$ref": "#/definitions/Result"
         },
-        "doc_string": {
-          "$ref": "#/definitions/DocString"
-        },
         "rows": {
-          "type": "array",
           "items": {
             "$ref": "#/definitions/DataTableRow"
-          }
+          },
+          "type": "array"
         }
       },
       "required": [
@@ -238,56 +272,22 @@
         "name",
         "result"
       ],
-      "additionalProperties": false
-    },
-    "DocString": {
-      "type": "object",
-      "properties": {
-        "line": {
-          "type": "number"
-        },
-        "value": {
-          "type": "string"
-        },
-        "content_type": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "line",
-        "value"
-      ],
-      "additionalProperties": false
-    },
-    "DataTableRow": {
-      "type": "object",
-      "properties": {
-        "cells": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "cells"
-      ],
-      "additionalProperties": false
+      "type": "object"
     },
     "Tag": {
-      "type": "object",
+      "additionalProperties": false,
       "properties": {
-        "name": {
-          "type": "string"
-        },
         "line": {
           "type": "number"
+        },
+        "name": {
+          "type": "string"
         }
       },
       "required": [
         "name"
       ],
-      "additionalProperties": false
+      "type": "object"
     }
   }
 }

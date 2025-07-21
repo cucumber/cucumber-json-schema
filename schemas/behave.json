@@ -1,45 +1,113 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
   "$ref": "#/definitions/BehaveJson",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "BehaveJson": {
-      "type": "array",
       "items": {
         "$ref": "#/definitions/Feature"
-      }
+      },
+      "type": "array"
     },
-    "Feature": {
-      "type": "object",
+    "Argument": {
+      "additionalProperties": false,
       "properties": {
-        "status": {
-          "$ref": "#/definitions/Status"
-        },
-        "location": {
+        "name": {
           "type": "string"
         },
+        "original": {
+          "type": "string"
+        },
+        "value": {}
+      },
+      "required": [
+        "name",
+        "value",
+        "original"
+      ],
+      "type": "object"
+    },
+    "Element": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "keyword": {
+          "type": "string"
+        },
+        "location": {
           "type": "string"
         },
         "name": {
           "type": "string"
         },
-        "description": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+        "status": {
+          "$ref": "#/definitions/Status"
         },
-        "elements": {
-          "type": "array",
+        "steps": {
           "items": {
-            "$ref": "#/definitions/Element"
-          }
+            "$ref": "#/definitions/Step"
+          },
+          "type": "array"
         },
         "tags": {
-          "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "type": "array"
+        },
+        "type": {
+          "enum": [
+            "background",
+            "scenario"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "steps",
+        "type",
+        "name",
+        "keyword",
+        "location"
+      ],
+      "type": "object"
+    },
+    "Feature": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "elements": {
+          "items": {
+            "$ref": "#/definitions/Element"
+          },
+          "type": "array"
+        },
+        "keyword": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/Status"
+        },
+        "tags": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         }
       },
       "required": [
@@ -50,87 +118,84 @@
         "elements",
         "tags"
       ],
-      "additionalProperties": false
+      "type": "object"
     },
-    "Status": {
-      "type": "string",
-      "enum": [
-        "passed",
-        "failed",
-        "skipped",
-        "undefined"
-      ]
-    },
-    "Element": {
-      "type": "object",
+    "Match": {
+      "additionalProperties": false,
       "properties": {
-        "steps": {
-          "type": "array",
+        "arguments": {
           "items": {
-            "$ref": "#/definitions/Step"
-          }
-        },
-        "type": {
-          "type": "string",
-          "enum": [
-            "background",
-            "scenario"
-          ]
-        },
-        "name": {
-          "type": "string"
-        },
-        "description": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "keyword": {
-          "type": "string"
+            "$ref": "#/definitions/Argument"
+          },
+          "type": "array"
         },
         "location": {
           "type": "string"
+        }
+      },
+      "required": [
+        "location",
+        "arguments"
+      ],
+      "type": "object"
+    },
+    "Result": {
+      "additionalProperties": false,
+      "properties": {
+        "duration": {
+          "type": "number"
         },
-        "tags": {
-          "type": "array",
+        "error_message": {
           "items": {
             "type": "string"
-          }
+          },
+          "type": "array"
         },
         "status": {
           "$ref": "#/definitions/Status"
         }
       },
       "required": [
-        "steps",
-        "type",
-        "name",
-        "keyword",
-        "location"
+        "status",
+        "duration"
       ],
-      "additionalProperties": false
+      "type": "object"
+    },
+    "Row": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "Status": {
+      "enum": [
+        "passed",
+        "failed",
+        "skipped",
+        "undefined"
+      ],
+      "type": "string"
     },
     "Step": {
-      "type": "object",
+      "additionalProperties": false,
       "properties": {
-        "step_type": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
         "keyword": {
           "type": "string"
         },
         "location": {
           "type": "string"
         },
+        "match": {
+          "$ref": "#/definitions/Match"
+        },
+        "name": {
+          "type": "string"
+        },
         "result": {
           "$ref": "#/definitions/Result"
         },
-        "match": {
-          "$ref": "#/definitions/Match"
+        "step_type": {
+          "type": "string"
         },
         "table": {
           "$ref": "#/definitions/Table"
@@ -145,87 +210,22 @@
         "keyword",
         "location"
       ],
-      "additionalProperties": false
-    },
-    "Result": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "$ref": "#/definitions/Status"
-        },
-        "duration": {
-          "type": "number"
-        },
-        "error_message": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "status",
-        "duration"
-      ],
-      "additionalProperties": false
-    },
-    "Match": {
-      "type": "object",
-      "properties": {
-        "location": {
-          "type": "string"
-        },
-        "arguments": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Argument"
-          }
-        }
-      },
-      "required": [
-        "location",
-        "arguments"
-      ],
-      "additionalProperties": false
-    },
-    "Argument": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "value": {},
-        "original": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "name",
-        "value",
-        "original"
-      ],
-      "additionalProperties": false
+      "type": "object"
     },
     "Table": {
-      "type": "object",
+      "additionalProperties": false,
       "properties": {
         "rows": {
-          "type": "array",
           "items": {
             "$ref": "#/definitions/Row"
-          }
+          },
+          "type": "array"
         }
       },
       "required": [
         "rows"
       ],
-      "additionalProperties": false
-    },
-    "Row": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
+      "type": "object"
     }
   }
 }

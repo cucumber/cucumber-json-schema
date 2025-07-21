@@ -1,149 +1,12 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
   "$ref": "#/definitions/CucumberJsJson",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "CucumberJsJson": {
-      "type": "array",
       "items": {
         "$ref": "#/definitions/JsFeature"
-      }
-    },
-    "JsFeature": {
-      "type": "object",
-      "properties": {
-        "uri": {
-          "type": "string"
-        },
-        "id": {
-          "type": "string"
-        },
-        "line": {
-          "type": "number"
-        },
-        "keyword": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "elements": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/JsElement"
-          }
-        },
-        "tags": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/JsTag"
-          }
-        }
       },
-      "required": [
-        "uri",
-        "id",
-        "line",
-        "keyword",
-        "name",
-        "elements",
-        "tags"
-      ],
-      "additionalProperties": false
-    },
-    "JsElement": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "line": {
-          "type": "number"
-        },
-        "type": {
-          "type": "string",
-          "const": "scenario"
-        },
-        "keyword": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "steps": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/JsStepOrHook"
-          }
-        },
-        "tags": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/JsTag"
-          }
-        }
-      },
-      "required": [
-        "id",
-        "line",
-        "keyword",
-        "name",
-        "steps",
-        "tags"
-      ],
-      "additionalProperties": false
-    },
-    "JsStepOrHook": {
-      "anyOf": [
-        {
-          "$ref": "#/definitions/JsStep"
-        },
-        {
-          "$ref": "#/definitions/JsHookStep"
-        }
-      ]
-    },
-    "JsStep": {
-      "type": "object",
-      "properties": {
-        "arguments": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/JsArgument"
-          }
-        },
-        "keyword": {
-          "type": "string"
-        },
-        "line": {
-          "type": "number"
-        },
-        "match": {
-          "$ref": "#/definitions/JsMatch"
-        },
-        "name": {
-          "type": "string"
-        },
-        "isBackground": {
-          "type": "boolean"
-        },
-        "result": {
-          "$ref": "#/definitions/JsResult"
-        }
-      },
-      "required": [
-        "arguments",
-        "keyword",
-        "line",
-        "name",
-        "result"
-      ],
-      "additionalProperties": false
+      "type": "array"
     },
     "JsArgument": {
       "anyOf": [
@@ -155,8 +18,23 @@
         }
       ]
     },
+    "JsDataTable": {
+      "additionalProperties": false,
+      "properties": {
+        "rows": {
+          "items": {
+            "$ref": "#/definitions/JsRow"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "rows"
+      ],
+      "type": "object"
+    },
     "JsDocString": {
-      "type": "object",
+      "additionalProperties": false,
       "properties": {
         "content": {
           "type": "string"
@@ -169,89 +47,109 @@
         "content",
         "line"
       ],
-      "additionalProperties": false
+      "type": "object"
     },
-    "JsDataTable": {
-      "type": "object",
+    "JsElement": {
+      "additionalProperties": false,
       "properties": {
-        "rows": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/JsRow"
-          }
-        }
-      },
-      "required": [
-        "rows"
-      ],
-      "additionalProperties": false
-    },
-    "JsRow": {
-      "type": "object",
-      "properties": {
-        "cells": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "cells"
-      ],
-      "additionalProperties": false
-    },
-    "JsMatch": {
-      "type": "object",
-      "properties": {
-        "location": {
+        "description": {
           "type": "string"
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "additionalProperties": false
-    },
-    "JsResult": {
-      "type": "object",
-      "properties": {
-        "duration": {
+        },
+        "id": {
+          "type": "string"
+        },
+        "keyword": {
+          "type": "string"
+        },
+        "line": {
           "type": "number"
         },
-        "status": {
-          "$ref": "#/definitions/JsStatus"
+        "name": {
+          "type": "string"
         },
-        "error_message": {
+        "steps": {
+          "items": {
+            "$ref": "#/definitions/JsStepOrHook"
+          },
+          "type": "array"
+        },
+        "tags": {
+          "items": {
+            "$ref": "#/definitions/JsTag"
+          },
+          "type": "array"
+        },
+        "type": {
+          "const": "scenario",
           "type": "string"
         }
       },
       "required": [
-        "status"
+        "id",
+        "line",
+        "keyword",
+        "name",
+        "steps",
+        "tags"
       ],
-      "additionalProperties": false
+      "type": "object"
     },
-    "JsStatus": {
-      "type": "string",
-      "enum": [
-        "passed",
-        "failed",
-        "skipped",
-        "undefined",
-        "pending"
-      ]
+    "JsFeature": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "elements": {
+          "items": {
+            "$ref": "#/definitions/JsElement"
+          },
+          "type": "array"
+        },
+        "id": {
+          "type": "string"
+        },
+        "keyword": {
+          "type": "string"
+        },
+        "line": {
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
+        },
+        "tags": {
+          "items": {
+            "$ref": "#/definitions/JsTag"
+          },
+          "type": "array"
+        },
+        "uri": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "uri",
+        "id",
+        "line",
+        "keyword",
+        "name",
+        "elements",
+        "tags"
+      ],
+      "type": "object"
     },
     "JsHookStep": {
-      "type": "object",
+      "additionalProperties": false,
       "properties": {
         "arguments": {
-          "type": "array",
+          "maxItems": 0,
           "minItems": 0,
-          "maxItems": 0
+          "type": "array"
         },
         "hidden": {
-          "type": "boolean",
-          "const": true
+          "const": true,
+          "type": "boolean"
         },
         "keyword": {
           "type": "string"
@@ -268,10 +166,112 @@
         "keyword",
         "result"
       ],
-      "additionalProperties": false
+      "type": "object"
+    },
+    "JsMatch": {
+      "additionalProperties": false,
+      "properties": {
+        "location": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "type": "object"
+    },
+    "JsResult": {
+      "additionalProperties": false,
+      "properties": {
+        "duration": {
+          "type": "number"
+        },
+        "error_message": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/JsStatus"
+        }
+      },
+      "required": [
+        "status"
+      ],
+      "type": "object"
+    },
+    "JsRow": {
+      "additionalProperties": false,
+      "properties": {
+        "cells": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "cells"
+      ],
+      "type": "object"
+    },
+    "JsStatus": {
+      "enum": [
+        "passed",
+        "failed",
+        "skipped",
+        "undefined",
+        "pending"
+      ],
+      "type": "string"
+    },
+    "JsStep": {
+      "additionalProperties": false,
+      "properties": {
+        "arguments": {
+          "items": {
+            "$ref": "#/definitions/JsArgument"
+          },
+          "type": "array"
+        },
+        "isBackground": {
+          "type": "boolean"
+        },
+        "keyword": {
+          "type": "string"
+        },
+        "line": {
+          "type": "number"
+        },
+        "match": {
+          "$ref": "#/definitions/JsMatch"
+        },
+        "name": {
+          "type": "string"
+        },
+        "result": {
+          "$ref": "#/definitions/JsResult"
+        }
+      },
+      "required": [
+        "arguments",
+        "keyword",
+        "line",
+        "name",
+        "result"
+      ],
+      "type": "object"
+    },
+    "JsStepOrHook": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/JsStep"
+        },
+        {
+          "$ref": "#/definitions/JsHookStep"
+        }
+      ]
     },
     "JsTag": {
-      "type": "object",
+      "additionalProperties": false,
       "properties": {
         "line": {
           "type": "number"
@@ -284,7 +284,7 @@
         "line",
         "name"
       ],
-      "additionalProperties": false
+      "type": "object"
     }
   }
 }

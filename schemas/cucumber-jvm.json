@@ -1,45 +1,158 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
   "$ref": "#/definitions/CucumberJvmJson",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "CucumberJvmJson": {
-      "type": "array",
       "items": {
         "$ref": "#/definitions/JvmFeature"
-      }
+      },
+      "type": "array"
     },
-    "JvmFeature": {
-      "type": "object",
+    "JvmArgument": {
+      "additionalProperties": false,
       "properties": {
-        "uri": {
-          "type": "string"
+        "offset": {
+          "type": "number"
         },
-        "id": {
+        "val": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "val",
+        "offset"
+      ],
+      "type": "object"
+    },
+    "JvmDataTableRow": {
+      "additionalProperties": false,
+      "properties": {
+        "cells": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "cells"
+      ],
+      "type": "object"
+    },
+    "JvmDocString": {
+      "additionalProperties": false,
+      "properties": {
+        "content_type": {
           "type": "string"
         },
         "line": {
           "type": "number"
         },
-        "keyword": {
+        "value": {
           "type": "string"
+        }
+      },
+      "required": [
+        "line",
+        "value"
+      ],
+      "type": "object"
+    },
+    "JvmElement": {
+      "additionalProperties": false,
+      "properties": {
+        "after": {
+          "items": {
+            "$ref": "#/definitions/JvmHook"
+          },
+          "type": "array"
         },
-        "name": {
-          "type": "string"
+        "before": {
+          "items": {
+            "$ref": "#/definitions/JvmHook"
+          },
+          "type": "array"
         },
         "description": {
           "type": "string"
         },
-        "elements": {
-          "type": "array",
+        "id": {
+          "type": "string"
+        },
+        "keyword": {
+          "type": "string"
+        },
+        "line": {
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
+        },
+        "start_timestamp": {
+          "type": "string"
+        },
+        "steps": {
           "items": {
-            "$ref": "#/definitions/JvmElement"
-          }
+            "$ref": "#/definitions/JvmStep"
+          },
+          "type": "array"
         },
         "tags": {
-          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JvmTag"
+          },
+          "type": "array"
+        },
+        "type": {
+          "enum": [
+            "background",
+            "scenario"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "line",
+        "type",
+        "keyword",
+        "name",
+        "description",
+        "steps"
+      ],
+      "type": "object"
+    },
+    "JvmFeature": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "elements": {
+          "items": {
+            "$ref": "#/definitions/JvmElement"
+          },
+          "type": "array"
+        },
+        "id": {
+          "type": "string"
+        },
+        "keyword": {
+          "type": "string"
+        },
+        "line": {
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
+        },
+        "tags": {
           "items": {
             "$ref": "#/definitions/JvmLocationTag"
-          }
+          },
+          "type": "array"
+        },
+        "uri": {
+          "type": "string"
         }
       },
       "required": [
@@ -51,202 +164,10 @@
         "description",
         "elements"
       ],
-      "additionalProperties": false
-    },
-    "JvmElement": {
-      "type": "object",
-      "properties": {
-        "start_timestamp": {
-          "type": "string"
-        },
-        "line": {
-          "type": "number"
-        },
-        "id": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string",
-          "enum": [
-            "background",
-            "scenario"
-          ]
-        },
-        "keyword": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "steps": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/JvmStep"
-          }
-        },
-        "before": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/JvmHook"
-          }
-        },
-        "after": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/JvmHook"
-          }
-        },
-        "tags": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/JvmTag"
-          }
-        }
-      },
-      "required": [
-        "line",
-        "type",
-        "keyword",
-        "name",
-        "description",
-        "steps"
-      ],
-      "additionalProperties": false
-    },
-    "JvmStep": {
-      "type": "object",
-      "properties": {
-        "keyword": {
-          "type": "string"
-        },
-        "line": {
-          "type": "number"
-        },
-        "match": {
-          "$ref": "#/definitions/JvmMatch"
-        },
-        "name": {
-          "type": "string"
-        },
-        "result": {
-          "$ref": "#/definitions/JvmResult"
-        },
-        "doc_string": {
-          "$ref": "#/definitions/JvmDocString"
-        },
-        "rows": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/JvmDataTableRow"
-          }
-        }
-      },
-      "required": [
-        "keyword",
-        "line",
-        "name",
-        "result"
-      ],
-      "additionalProperties": false
-    },
-    "JvmMatch": {
-      "type": "object",
-      "properties": {
-        "location": {
-          "type": "string"
-        },
-        "arguments": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/JvmArgument"
-          }
-        }
-      },
-      "additionalProperties": false
-    },
-    "JvmArgument": {
-      "type": "object",
-      "properties": {
-        "val": {
-          "type": "string"
-        },
-        "offset": {
-          "type": "number"
-        }
-      },
-      "required": [
-        "val",
-        "offset"
-      ],
-      "additionalProperties": false
-    },
-    "JvmResult": {
-      "type": "object",
-      "properties": {
-        "duration": {
-          "type": "number"
-        },
-        "status": {
-          "$ref": "#/definitions/JvmStatus"
-        },
-        "error_message": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "status"
-      ],
-      "additionalProperties": false
-    },
-    "JvmStatus": {
-      "type": "string",
-      "enum": [
-        "passed",
-        "failed",
-        "skipped",
-        "undefined",
-        "pending"
-      ]
-    },
-    "JvmDocString": {
-      "type": "object",
-      "properties": {
-        "line": {
-          "type": "number"
-        },
-        "value": {
-          "type": "string"
-        },
-        "content_type": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "line",
-        "value"
-      ],
-      "additionalProperties": false
-    },
-    "JvmDataTableRow": {
-      "type": "object",
-      "properties": {
-        "cells": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "cells"
-      ],
-      "additionalProperties": false
+      "type": "object"
     },
     "JvmHook": {
-      "type": "object",
+      "additionalProperties": false,
       "properties": {
         "match": {
           "$ref": "#/definitions/JvmMatch"
@@ -259,10 +180,125 @@
         "match",
         "result"
       ],
-      "additionalProperties": false
+      "type": "object"
+    },
+    "JvmLocation": {
+      "additionalProperties": false,
+      "properties": {
+        "column": {
+          "type": "number"
+        },
+        "line": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "line",
+        "column"
+      ],
+      "type": "object"
+    },
+    "JvmLocationTag": {
+      "additionalProperties": false,
+      "properties": {
+        "location": {
+          "$ref": "#/definitions/JvmLocation"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "type",
+        "location"
+      ],
+      "type": "object"
+    },
+    "JvmMatch": {
+      "additionalProperties": false,
+      "properties": {
+        "arguments": {
+          "items": {
+            "$ref": "#/definitions/JvmArgument"
+          },
+          "type": "array"
+        },
+        "location": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "JvmResult": {
+      "additionalProperties": false,
+      "properties": {
+        "duration": {
+          "type": "number"
+        },
+        "error_message": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/JvmStatus"
+        }
+      },
+      "required": [
+        "status"
+      ],
+      "type": "object"
+    },
+    "JvmStatus": {
+      "enum": [
+        "passed",
+        "failed",
+        "skipped",
+        "undefined",
+        "pending"
+      ],
+      "type": "string"
+    },
+    "JvmStep": {
+      "additionalProperties": false,
+      "properties": {
+        "doc_string": {
+          "$ref": "#/definitions/JvmDocString"
+        },
+        "keyword": {
+          "type": "string"
+        },
+        "line": {
+          "type": "number"
+        },
+        "match": {
+          "$ref": "#/definitions/JvmMatch"
+        },
+        "name": {
+          "type": "string"
+        },
+        "result": {
+          "$ref": "#/definitions/JvmResult"
+        },
+        "rows": {
+          "items": {
+            "$ref": "#/definitions/JvmDataTableRow"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "keyword",
+        "line",
+        "name",
+        "result"
+      ],
+      "type": "object"
     },
     "JvmTag": {
-      "type": "object",
+      "additionalProperties": false,
       "properties": {
         "name": {
           "type": "string"
@@ -271,43 +307,7 @@
       "required": [
         "name"
       ],
-      "additionalProperties": false
-    },
-    "JvmLocationTag": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
-        "location": {
-          "$ref": "#/definitions/JvmLocation"
-        }
-      },
-      "required": [
-        "name",
-        "type",
-        "location"
-      ],
-      "additionalProperties": false
-    },
-    "JvmLocation": {
-      "type": "object",
-      "properties": {
-        "line": {
-          "type": "number"
-        },
-        "column": {
-          "type": "number"
-        }
-      },
-      "required": [
-        "line",
-        "column"
-      ],
-      "additionalProperties": false
+      "type": "object"
     }
   }
 }
