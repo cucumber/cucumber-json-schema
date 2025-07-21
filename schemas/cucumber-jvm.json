@@ -121,6 +121,25 @@
       ],
       "type": "object"
     },
+    "JvmEmbedding": {
+      "additionalProperties": false,
+      "properties": {
+        "data": {
+          "type": "string"
+        },
+        "mime_type": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "mime_type",
+        "data"
+      ],
+      "type": "object"
+    },
     "JvmFeature": {
       "additionalProperties": false,
       "properties": {
@@ -169,8 +188,20 @@
     "JvmHook": {
       "additionalProperties": false,
       "properties": {
+        "embeddings": {
+          "items": {
+            "$ref": "#/definitions/JvmEmbedding"
+          },
+          "type": "array"
+        },
         "match": {
           "$ref": "#/definitions/JvmMatch"
+        },
+        "output": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         },
         "result": {
           "$ref": "#/definitions/JvmResult"
@@ -267,6 +298,12 @@
         "doc_string": {
           "$ref": "#/definitions/JvmDocString"
         },
+        "embeddings": {
+          "items": {
+            "$ref": "#/definitions/JvmEmbedding"
+          },
+          "type": "array"
+        },
         "keyword": {
           "type": "string"
         },
@@ -278,6 +315,12 @@
         },
         "name": {
           "type": "string"
+        },
+        "output": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         },
         "result": {
           "$ref": "#/definitions/JvmResult"

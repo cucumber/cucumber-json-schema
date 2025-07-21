@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Fixed 
+- Added missing embedding and output to `cucumber-jvm.json`
+
 ### Changed
 - Sort keys for clarity
 
