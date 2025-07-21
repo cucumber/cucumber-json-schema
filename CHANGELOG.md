@@ -6,11 +6,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-### Fixed 
-- Added missing embedding and output to `cucumber-jvm.json`
 
+## [0.2.0] - 2025-07-22
 ### Changed
 - Sort keys for clarity
+
+### Fixed
+- Added missing embedding and output to `cucumber-jvm.json`
 
 ## [0.1.1] - 2024-04-21
 ### Changed
@@ -20,6 +22,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Initial release
 
-[Unreleased]: https://github.com/cucumber/cucumber-json-schema/compare/v0.1.1...HEAD
+[Unreleased]: https://github.com/cucumber/cucumber-json-schema/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/cucumber/cucumber-json-schema/compare/v0.1.1...v0.2.0
 [0.1.1]: https://github.com/cucumber/cucumber-json-schema/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/cucumber/html-formatter/compare/8d0dcd7300b187348157e8ac9e01d45b066dcd1a...v0.1.0
