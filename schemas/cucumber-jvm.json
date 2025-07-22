@@ -295,6 +295,16 @@
     "JvmStep": {
       "additionalProperties": false,
       "properties": {
+        "after": {
+          "array": {
+            "$ref": "#/definitions/JvmHook"
+          }
+        },
+        "before": {
+          "array": {
+            "$ref": "#/definitions/JvmHook"
+          }
+        },
         "doc_string": {
           "$ref": "#/definitions/JvmDocString"
         },

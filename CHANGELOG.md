@@ -6,13 +6,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Fixed
+- Added missing `step.before` and `step.after` to `cucumber-jvm.json`
 
 ## [0.2.0] - 2025-07-22
 ### Changed
 - Sort keys for clarity
 
 ### Fixed
-- Added missing embedding and output to `cucumber-jvm.json`
+- Added missing `step.embeddings` and `step.output` to `cucumber-jvm.json`
 
 ## [0.1.1] - 2024-04-21
 ### Changed
