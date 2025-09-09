@@ -6,8 +6,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+## [0.2.3] - 2025-09-09
 ### Fixed
-- Add missing `JvmStatus.ambiguous`  
+- Add missing `JvmStatus.ambiguous`
 
 ## [0.2.2] - 2025-09-03
 ### Fixed
@@ -32,7 +34,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Initial release
 
-[Unreleased]: https://github.com/cucumber/cucumber-json-schema/compare/v0.2.2...HEAD
+[Unreleased]: https://github.com/cucumber/cucumber-json-schema/compare/v0.2.3...HEAD
+[0.2.3]: https://github.com/cucumber/cucumber-json-schema/compare/v0.2.2...v0.2.3
 [0.2.2]: https://github.com/cucumber/cucumber-json-schema/compare/v0.2.1...v0.2.2
 [0.2.1]: https://github.com/cucumber/cucumber-json-schema/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/cucumber/cucumber-json-schema/compare/v0.1.1...v0.2.0
