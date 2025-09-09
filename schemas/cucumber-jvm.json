@@ -281,10 +281,11 @@
     "JvmStatus": {
       "enum": [
         "passed",
-        "failed",
         "skipped",
+        "pending",
         "undefined",
-        "pending"
+        "ambiguous",
+        "failed"
       ],
       "type": "string"
     },
