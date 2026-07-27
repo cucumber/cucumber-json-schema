@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Fixed
+- Add `repository` information to `package.json`
 
 ## [0.2.4] - 2026-07-27
 ### Fixed

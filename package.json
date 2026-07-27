@@ -12,5 +12,9 @@
   },
   "scripts": {
     "test": "node ./validation.test.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/cucumber/cucumber-json-schema.git"
   }
 }
