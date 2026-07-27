@@ -293,14 +293,16 @@
       "additionalProperties": false,
       "properties": {
         "after": {
-          "array": {
+          "items": {
             "$ref": "#/definitions/JvmHook"
-          }
+          },
+          "type": "array"
         },
         "before": {
-          "array": {
+          "items": {
             "$ref": "#/definitions/JvmHook"
-          }
+          },
+          "type": "array"
         },
         "doc_string": {
           "$ref": "#/definitions/JvmDocString"
